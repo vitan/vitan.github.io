@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<link rel="stylesheet" id="general-styles-css" href="/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="skin-css" href="/skins/paper-green/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="googleFonts-css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&amp;ver=3.4.2" type="text/css" media="all">
+<link rel="stylesheet" id="tabs-css" href="/css/tabs.css" type="text/css" media="all">
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/jqueryui.js"></script>
+<script type="text/javascript" src="/js/tabs.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{% if page.title %} {{ page.title }} | {% endif %}Vitan</title>
+
+<!-- Set google fonts -->
+<style type="text/css">
+    h1,h2,h3,h4,h5,h6,
+    #header #page-title,
+    .gallery-thumbs li .boxgrid .box-content em{
+        font-family: Yanone Kaffeesatz, arial, serif;
+    }
+</style>
+</head>
+<body class="home">
+<div id="wrapper">
+    {% include side-bar.html %}
+    <div id="main">
+        <!-- headline -->
+        <div class="home-quotes"><p>ALWAYS REMEMBERING MY WORDS!</p>
+            <p>------ZHOU WEITAO</p>
+        </div>
+        <div id="content">
+            <div id="page-content">
+                {% include content.html %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include footer.html %}
+{% include fork-me-on-github.html %}
+
+</body>
+</html>
