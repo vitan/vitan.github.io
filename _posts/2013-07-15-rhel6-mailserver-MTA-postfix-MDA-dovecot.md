@@ -145,7 +145,9 @@ I am still logging in *mail.example.com* as *root*.
 
         cp /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.bak
 
-* Config */etc/dovecot/conf.d/10-ssl.conf*, and diff output to the following:
+* Config */etc/dovecot/conf.d/10-ssl.conf* to turn off ssl, and diff output to the following:
+
+        diff /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.bak
 
 *OUTPUT:*
         6c6
@@ -153,8 +155,74 @@ I am still logging in *mail.example.com* as *root*.
         ---
         > #ssl = yes
 
-* Edit config file */etc/dovecot/conf.d/10-auth.conf*
+* Backup dovecot another config file */etc/dovecot/conf.d/10-auth.conf*
 
-    disable_plaintext_auth = no
-    auth_mechanisms = plain
-    !include auth-system.conf.ext
+        cp /etc/dovecot/conf.d/10-auth.conf /etc/dovecot/conf.d/10-auth.conf.bak
+
+* Config */etc/dovecot/conf.d/10-auth.conf* to enable plain text auth, and diff output to the following:
+
+        diff /etc/dovecot/conf.d/10-auth.conf /etc/dovecot/conf.d/10-auth.conf.bak
+
+*OUTPUT:*
+
+        10d9
+        < disable_plaintext_auth = no
+
+* Backup dovecot another config file */etc/dovecot/conf.d/auth-system.conf.ext*
+
+        cp /etc/dovecot/conf.d/auth-system.conf /etc/dovecot/conf.d/auth-system.conf.bak
+
+* Config */etc/dovecot/conf.d/auth-system.conf* for PAM authentication, and diff output to the following:
+
+        diff /etc/dovecot/conf.d/auth-system.conf /etc/dovecot/conf.d/auth-system.conf.bak
+
+*OUTPUT:*
+
+        15d14
+        <   args = session=yes dovecot
+
+* Backup dovecot another config file */etc/dovecot/conf.d/10-mail.conf*
+
+        cp /etc/dovecot/conf.d/10-mail.conf /etc/dovecot/conf.d/10-mail.conf.bak
+
+* Config */etc/dovecot/conf.d/10-mail.conf* to mail_location, and diff output to the following:
+
+        diff /etc/dovecot/conf.d/10-mail.conf /etc/dovecot/conf.d/10-mail.conf.bak
+
+*OUTPUT:*
+
+        31d30
+        < mail_location = mbox:~/mail:INBOX=/var/mail/%u
+
+* More config settings refer to [dovecot v2.0 configuration](http://wiki2.dovecot.org/FrontPage?action=show#Dovecot_configuration)
+
+* Reload the config files
+
+        doveadm reload
+
+* Always drop all the Iptables rules now.
+
+* A *trouble* caused by file permission on dovecot
+
+        ls -la /var/spool/mail/vitan
+
+unless the directory mode is *600*, run
+
+        chmod 600 /var/spool/mail/vitan
+
+make sure that all the directorys(in */var/spool/mail/) mode is 600 for using MUA(Evolution or Thunderbird).
+
+*REMEMBER* to change the dir mod after adding new user, if not, the new user fail to config MUA.
+
+###MUA Evolution basic config###
+
+Open the Evolution Interface and add the mail account step by step, leave others default except the followings:
+
+* Receiving Email
+        Server Type: IMAP
+        Server: mail.example.com
+
+* Sending Email
+        Server: mail.example.com
+
+* Now, *vitan* can receive and sending his mails on mail client Evolution.
