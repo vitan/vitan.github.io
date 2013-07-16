@@ -7,7 +7,7 @@ Simplest Mail Server Deployment using postfix for MTA and dovecot for MDA
 =========================================================================
 
 A simplest mail server deployment doc presents smallest config using postfix for MTA, dovecot for MDA and Evolution for MUA, which *DONOT* need DNS setting.
-I am looking such virtual machine as a test/devel-server for project development.
+I am using such virtual machine as a test/devel-server for project development.
 
 Prerequisites
 -------------
@@ -16,7 +16,7 @@ Prerequisites
 
         mail.example.com
 
-using the same server can lead *NO-DNS* setting for simplest config.
+    using the same server can lead *NO-DNS* setting for simplest config.
 
 * change to root
 
@@ -46,7 +46,7 @@ Basic config
 
         diff /etc/postfix/main.cf /etc/postfix/main.cf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
         75c75
         < myhostname = mail.usersys.redhat.com
         ---
@@ -75,7 +75,7 @@ Basic config
 
         postfix check
 
-any error message, you can refer [Postfix Basic Configuration](http://www.postfix.org/BASIC_CONFIGURATION_README.html) for trouble shooting.
+    any error message, you can refer [Postfix Basic Configuration](http://www.postfix.org/BASIC_CONFIGURATION_README.html) for trouble shooting.
 
 * Restart the service *postfix* after successfully checking
 
@@ -86,7 +86,7 @@ any error message, you can refer [Postfix Basic Configuration](http://www.postfi
         iptables -A INPUT -p tcp -s 0/0 --sport 1024:65535 -d mail.example.com --dport 25 -m state --state NEW,ESTABLISHED -j ACCEPT
         service iptables save
 
-*WARNING:* In reality configuration I failed to make it, and at last using the following commands to clear all the firewall(or iptables) rules, as my virtual machine no security requirement.Shooting the trouble in future.
+    *WARNING:* In reality configuration I failed to make it, and at last using the following commands to clear all the firewall(or iptables) rules, as my virtual machine no security requirement.Shooting the trouble in future.
 
         iptables -F
         service iptables save
@@ -106,7 +106,7 @@ any error message, you can refer [Postfix Basic Configuration](http://www.postfi
 
         cat /var/spool/mail/vitan
 
-The following output is welcome.
+    The following output is welcome.
 
         From: Weitao Zhou <weizhou@test.example.com>
         ......
@@ -131,7 +131,7 @@ I am still logging in *mail.example.com* as *root*.
 
         diff /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
         20c20
         < protocols = imap pop3
         ---
@@ -149,7 +149,7 @@ I am still logging in *mail.example.com* as *root*.
 
         diff /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
         6c6
         < ssl = no
         ---
@@ -163,7 +163,7 @@ I am still logging in *mail.example.com* as *root*.
 
         diff /etc/dovecot/conf.d/10-auth.conf /etc/dovecot/conf.d/10-auth.conf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
 
         10d9
         < disable_plaintext_auth = no
@@ -176,7 +176,7 @@ I am still logging in *mail.example.com* as *root*.
 
         diff /etc/dovecot/conf.d/auth-system.conf /etc/dovecot/conf.d/auth-system.conf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
 
         15d14
         <   args = session=yes dovecot
@@ -189,7 +189,7 @@ I am still logging in *mail.example.com* as *root*.
 
         diff /etc/dovecot/conf.d/10-mail.conf /etc/dovecot/conf.d/10-mail.conf.bak
 
-*OUTPUT:*
+    *OUTPUT:*
 
         31d30
         < mail_location = mbox:~/mail:INBOX=/var/mail/%u
@@ -206,13 +206,13 @@ I am still logging in *mail.example.com* as *root*.
 
         ls -la /var/spool/mail/vitan
 
-unless the directory mode is *600*, run
+    unless the directory mode is *600*, run
 
         chmod 600 /var/spool/mail/vitan
 
-make sure that all the directorys(in */var/spool/mail/) mode is 600 for using MUA(Evolution or Thunderbird).
+    make sure that all the directorys(in */var/spool/mail/) mode is 600 for using MUA(Evolution or Thunderbird).
 
-*REMEMBER* to change the dir mod after adding new user, if not, the new user fail to config MUA.
+    *REMEMBER* to change the dir mod after adding new user, if not, the new user fail to config MUA.
 
 ###MUA Evolution basic config###
 
