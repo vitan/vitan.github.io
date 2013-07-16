@@ -6,11 +6,13 @@ title: rhel6-simplest-mail-server-deployment-using-postfix-for-MTA-and-dovecot-f
 Simplest Mail Server Deployment using postfix for MTA and dovecot for MDA
 =========================================================================
 
-A simplest mail server deployment doc presents smallest config using postfix for MTA, dovecot for MDA and Evolution for MUA, which *DONOT* need DNS setting.
+A simplest mail server deployment doc presents smallest config using postfix for MTA, dovecot for MDA and Evolution for MUA, which **DONOT** need DNS setting.
 I am using such virtual machine as a test/devel-server for project development.
 
 Prerequisites
 -------------
+* * *
+* * *
 
 * Assume MTA and MDA server is **the same one**
 
@@ -35,6 +37,8 @@ Prerequisites
 
 Basic config
 ------------
+* * *
+* * *
 
 ###postfix basic config###
 
@@ -91,6 +95,7 @@ Basic config
         iptables -F
         service iptables save
 
+* * *
 ###Test mail(or postfix) server###
 
 * Add user vitan to *mail.example.com*
