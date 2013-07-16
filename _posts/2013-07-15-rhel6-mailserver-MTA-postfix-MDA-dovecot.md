@@ -12,11 +12,11 @@ I am using such virtual machine as a test/devel-server for project development.
 Prerequisites
 -------------
 
-* Assume MTA and MDA server is the same one
+* Assume MTA and MDA server is **the same one**
 
         mail.example.com
 
-    using the same server can lead *NO-DNS* setting for simplest config.
+    **using the same server can lead *NO-DNS* setting for simplest config.**
 
 * change to root
 
@@ -86,7 +86,7 @@ Basic config
         iptables -A INPUT -p tcp -s 0/0 --sport 1024:65535 -d mail.example.com --dport 25 -m state --state NEW,ESTABLISHED -j ACCEPT
         service iptables save
 
-    *WARNING:* In reality configuration I failed to make it, and at last using the following commands to clear all the firewall(or iptables) rules, as my virtual machine no security requirement.Shooting the trouble in future.
+    **WARNING:** In reality configuration I failed to make it, and at last using the following commands to clear all the firewall(or iptables) rules, as my virtual machine no security requirement.Shooting the trouble in future.
 
         iptables -F
         service iptables save
@@ -119,6 +119,7 @@ Basic config
 
         Test the smtp server
 
+* * *
 ###dovecot basic config###
 
 I am still logging in *mail.example.com* as *root*.
@@ -202,18 +203,19 @@ I am still logging in *mail.example.com* as *root*.
 
 * Always drop all the Iptables rules now.
 
-* A *trouble* caused by file permission on dovecot
+* A **trouble** caused by file permission on dovecot
 
         ls -la /var/spool/mail/vitan
 
-    unless the directory mode is *600*, run
+    unless the directory mode is **600**, run
 
         chmod 600 /var/spool/mail/vitan
 
     make sure that all the directorys(in */var/spool/mail/) mode is 600 for using MUA(Evolution or Thunderbird).
 
-    *REMEMBER* to change the dir mod after adding new user, if not, the new user fail to config MUA.
+    **REMEMBER** to change the dir mod after adding new user, if not, the new user fail to config MUA.
 
+* * *
 ###MUA Evolution basic config###
 
 Open the Evolution Interface and add the mail account step by step, leave others default except the followings:
