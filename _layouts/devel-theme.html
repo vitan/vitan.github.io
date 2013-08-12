@@ -5,8 +5,14 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     {% include nav-bar.html %}
     <div class="container">
-        {% include side-bar.html %}
-        {% include content.html %}
+        <div class="row">
+            <div class="col-6 col-lg-4 col-sm-4">
+                {% include side-bar.html %}
+            </div>
+            <div class="col-12 col-lg-8 col-sm-8">
+                {% include content.html %}
+            </div>
+        </div>
     </div>
     {% include footer.html %}
     {% include fork-me-on-github.html %}
