@@ -1,27 +1,14 @@
-<h1 class="header-line" id="posts">POSTS</h1>
-    <ul class="tabs">
-        <li><a href="#" class="current">Recent posts</a></li>
-        <li><a href="#">Golden posts</a></li>
-    </ul>
-    <div class="panes">
-        <div style="display: block;">
-            <ul class="blocks-list">	
-                {% for post in site.posts %}
-                <li>
-                <div class="the-excerpt">
-                    <strong>{{ post.title }}</strong>
-                    <p>{{ post.excerpt }}</p>
-                    <a href="{{ post.url }}" class="link-arrow">Read more →</a>
-                </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+{% for post in site.posts %}
+    <div class="row">
+        <h3>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+        </h3>
+        <!--TODO: posts excerpt elgant solution -->
+        <p>{{ post.excerpt }}</p>
+        <p>{{ post.tags }}</p>
+        <p>{{ post.categories }}</p>
+        <p>
+            <a href="{{ post.url }}">Read More</a>
+        </p>
     </div>
-<h1 class="header-line" id="i-am-reading">I AM READING</h1>
-<ul class="feature-blocks">
-    <li class="odd">
-    <div class="block">
-    </div>
-    </li>
-</ul>
+{% endfor %}
