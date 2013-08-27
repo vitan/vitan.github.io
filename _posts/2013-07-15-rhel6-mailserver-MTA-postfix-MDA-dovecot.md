@@ -1,6 +1,9 @@
 ---
 layout: post
-title: rhel6-simplest-mail-server-deployment-using-postfix-for-MTA-and-dovecot-for-MDA
+title: rhel6 simplest mail server deployment using postfix for MTA and dovecot for MDA
+tags: MTA MDA Thunderbird SMTP
+categories: Linux
+excerpt: A simplest mail server deployment doc presents smallest config using postfix for MTA, dovecot for MDA and Evolution for MUA, which **DONOT** need DNS setting.
 ---
 
 Simplest Mail Server Deployment using postfix for MTA and dovecot for MDA

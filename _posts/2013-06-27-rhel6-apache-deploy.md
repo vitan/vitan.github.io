@@ -1,6 +1,9 @@
 ---
 layout: post
-title: rhel6-apache-deploy
+title: rhel6 apache deploy
+tags: apache django wsgi
+categories: Linux
+excerpt: A simple deploy document which covered apache, django project, wsgi, rhel6.
 ---
 
 Red Hat Linux Enterprise 6 Apache Deploy Guide
