@@ -236,3 +236,5 @@ Open the Evolution Interface and add the mail account step by step, leave others
         Server: mail.example.com
 
 * Now, *vitan* can receive and sending his mails on mail client Evolution.
+
+{% include Disqus.html %}

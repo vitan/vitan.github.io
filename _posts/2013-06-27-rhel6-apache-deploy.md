@@ -146,3 +146,5 @@ Refer Urls
 ----------
 
 * [django guide for apache deployment](https://docs.djangoproject.com/en/1.3/howto/deployment/modwsgi/)
+
+{% include Disqus.html %}
