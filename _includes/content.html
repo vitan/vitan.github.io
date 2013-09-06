@@ -6,6 +6,8 @@
         <!--TODO: posts excerpt elgant solution -->
         <p class="clearfix hidden-xs">{{ post.excerpt }}</p>
         <p>
+            <span class="glyphicon glyphicon-calendar"></span>
+            {{ post.date | date: "%b %d, %Y" }} |
             <span class="glyphicon glyphicon-tags">Tags:</span>
             {% for tag in post.tags %}
             <span class="label label-info">
