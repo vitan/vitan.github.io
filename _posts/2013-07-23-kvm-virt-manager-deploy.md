@@ -1,3 +1,3 @@
 COMING SOON.
 
-{% include Disqus.html %}
+{% include disqus.html %}
