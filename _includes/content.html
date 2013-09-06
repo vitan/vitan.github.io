@@ -8,9 +8,9 @@
         <p>
             <span class="glyphicon glyphicon-calendar"></span>
             {{ post.date | date: "%b %d, %Y" }} |
-            <span class="glyphicon glyphicon-tags">Tags:</span>
+            <span class="glyphicon glyphicon-tags"></span>
             {% for tag in post.tags %}
-            <span class="label label-info">
+            <span class="text-info">
                 {{ tag }}
             </span>
             {% endfor %}
