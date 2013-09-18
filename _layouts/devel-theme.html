@@ -1,9 +1,5 @@
 {% include header.html %}
 <body data-spy="scroll">
-    <!-- JavaScript plugins (requires jQuery) -->
-    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    {% include disqus-js.html %}
     {% include nav-bar.html %}
     <div class="container">
         <div class="row">
@@ -19,5 +15,10 @@
     <div class="container footer">
         {% include footer.html %}
     </div>
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    {% include disqus-embed.html %}
+    {% include disqus-count.html %}
 </body>
 </html>
