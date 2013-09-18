@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: devel-theme
 title: rhel6 simplest mail server deployment using postfix for MTA and dovecot for MDA
 tags: MTA MDA Thunderbird SMTP
 categories: Linux

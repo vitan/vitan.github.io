@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: devel-theme
 title: rhel6 apache deploy
 tags: apache django wsgi
 categories: Linux
