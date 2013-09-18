@@ -1,5 +1,5 @@
 ---
-layout: devel-theme
+layout: post
 title: rhel6 simplest mail server deployment using postfix for MTA and dovecot for MDA
 tags: MTA MDA Thunderbird SMTP
 categories: Linux
@@ -236,5 +236,3 @@ Open the Evolution Interface and add the mail account step by step, leave others
         Server: mail.example.com
 
 * Now, *vitan* can receive and sending his mails on mail client Evolution.
-
-{% include disqus.html %}

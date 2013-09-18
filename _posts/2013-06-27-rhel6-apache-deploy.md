@@ -1,5 +1,5 @@
 ---
-layout: devel-theme
+layout: post
 title: rhel6 apache deploy
 tags: apache django wsgi
 categories: Linux
@@ -146,5 +146,3 @@ Refer Urls
 ----------
 
 * [django guide for apache deployment](https://docs.djangoproject.com/en/1.3/howto/deployment/modwsgi/)
-
-{% include disqus.html %}
