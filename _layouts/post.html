@@ -2,6 +2,19 @@
 layout: base 
 ---
 
+<h1>{{ page.title }}</h1>
+
+<p>
+    <span class="glyphicon glyphicon-comment"></span>
+    <a href="http://vitan.github.io{{ page.url }}#disqus_thread"></a> |
+    <span class="glyphicon glyphicon-calendar"></span>
+    {{ page.date | date: "%b %d, %Y" }} |
+    <span class="glyphicon glyphicon-tags"></span>
+    {% for tag in page.tags %}
+        {{ tag }}
+    {% endfor %}
+</p>
+
 {{ content }}
 
 {% include disqus.html %}
