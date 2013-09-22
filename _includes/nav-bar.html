@@ -12,8 +12,28 @@
 	<div class="navbar-collapse collapse navbar-collapse-scrollable navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="http://vitan.github.io" class="glyphicon glyphicon-home">Home</a></li>
-			<li><a href="#" class="glyphicon glyphicon-book">Projects</a></li>
-			<li><a href="#" class="glyphicon glyphicon-globe">Social</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown">Projects<b class="caret"></b></a>
+				<ul class="dropdown-menu" id="repo_list">
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle glyphicon glyphicon-globe" data-toggle="dropdown">Social<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="http://github.com/vitan" rel="tooltip" title="Go to github.com/vitan" target="_blank">GitHub</a>
+					</li>
+					<li>
+						<a href="http://www.linkedin.com/pub/zhou-weitao/60/302/706" rel="tooltip" title="Go to LinkedIn profile" target="_blank">LinkedIn</a>
+					</li>
+					<li>
+						<a href="http://www.delicious.com/vitan" rel="tooltip" title="Go to delicious.com/vitan" target="_blank">Delicious</a>
+					</li>
+					<li>
+						<a href="http://coderwall.com/vitan" rel="tooltip" title="Go to coderwall/vitan" target="_blank">Coderwall</a>
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </nav>
