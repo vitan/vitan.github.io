@@ -65,7 +65,9 @@ with the maybe view,
             template_name = 'group/edit.html'
             form_class = GroupEditForm
 
-###Good Implementation###
+###Improved Implementation but departing from Two Scoops advice###
+
+**Updated**
 
 Implement the restriction at *model* level, or before the action of model object save, we can code a listener connected with signal pre_save. Assume we write it in listener.py as following,
 
@@ -80,8 +82,18 @@ at the same time, connect the above listener with pre_save(),
 
 Here I ignored the interactive with front end.
 
+###Good Implementation###
 
-Obviously, the later is closer with DB than the former. The advantage of the later implementation is:
+Implement the restriction at *model* clean function,
+
+        class Group(models.Model):
+            ......
+            def clean(self):
+                from django.core.exceptions import ValidationError
+                    if self.owner is self.assistant:
+                        raise ValidationError("Can't set %s as the same group's owner&assistant" % self.owner.name)
+
+Obviously, the last is closer with DB than the formers. The advantage of the later implementation is:
 
 * To prevent future model action acted against our requirement, especially the directly group object operation.
 * To implement this feature reuse. We don't need consider it in the coming any group object operations yet.
