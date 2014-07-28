@@ -29,3 +29,17 @@ Assume the *Employee* model as following:
         """Employee model recording the basic info of employee
         """
         manager = TreeForeignKey('self', null=True, blank=True, related_name='members')
+
+Implementation
+--------------
+
+1. Add permission declaration, and the *Employee* model will be changed:
+
+        from django.contrib.auth.models import AbstractUser
+        from mptt.models import MPTTModel, TreeForeignKey
+        class Employee(MPTTModel, AbstractUser):
+            """Employee model recording the basic info of employee
+            """
+            manager = TreeForeignKey('self', null=True, blank=True, related_name='members')
+            class Meta:
+                permissions=(('change_employee_info', 'Can change employee info'),)
