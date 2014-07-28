@@ -14,6 +14,7 @@ There is a django model *Employee* subclassed from *django.contrib.auth.models.A
 
 * As a *direct* manager of some employees, I can edit my employees' info.
 * As a *indirect* manager of some employees, I can also edit such info based on the *edit* perm inherited from their managers.
+* The related *edit* perm will be automatically removed when one employee's *direct/indirect* manager changed.
 
 Prerequisites
 -------------
