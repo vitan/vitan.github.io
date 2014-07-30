@@ -44,6 +44,8 @@ Here I am directly giving the source code with some comments on the detail imple
         from django.contrib.auth.models import AbstractUser
         from mptt.models import MPTTModel, TreeForeignKey
         
+        logger = logging.getLogger(__name__)
+
         class Employee(MPTTModel, AbstractUser):
             """Employee model recording the basic info of employee
             """
@@ -60,6 +62,7 @@ Here I am directly giving the source code with some comments on the detail imple
                         if obj.manager:
                             # Record the old manager pk in memory for future perm remove.
                             old_manager_pk = obj.manager.pk
+
                         except Employee.DoesNotExist:
                             pass
 
@@ -67,6 +70,7 @@ Here I am directly giving the source code with some comments on the detail imple
 
                 # Record the new manager pk in memory for future perm assign.
                 new_manager_pk = self.manager.pk if self.manager else None
+
                 # Trigger function _manager_change once the manager changed
                 if new_manager_pk != old_manager_pk:
                     self._manager_change(old_manager_pk, new_manager_pk)
@@ -81,6 +85,7 @@ Here I am directly giving the source code with some comments on the detail imple
                 # Using MPTT api, quickly query out the current employee's descendants for his/her 
                 # old manager perm removing.
                 descendants = self.get_descendants(include_self=True)
+
                 try:
                     ancestors = Employee.objects.get(pk=old_manager_pk).get_ancestors(include_self=True)
                     bulk_remove_perm('change_employee_info', ancestors, descendants)
@@ -92,11 +97,15 @@ Here I am directly giving the source code with some comments on the detail imple
                     # Also using MPTT api, quickly query out the new manager's ancestors for
                     # his/her perm assigning.
                     ancestors = Employee.objects.get(pk=new_manager_pk).get_ancestors(include_self=True)
+
                     # Obviously, the inheritance of perm is causing DUPLICATE permission records inserted into
                     # *Permission* model which will causing sql error. In my real project, I am using raw sql to
                     # IGNORE the DUPLICATE permission records and forcely insert them, refering
                     # [Django Bulk Insert Manager for ON DUPLICATE IGNORE and ON DUPLICATE KEY in MySQL](https://gist.github.com/datamafia/9671827)
                     bulk_assign_perm('change_employee_info', ancestors, descendants)
+
                 except Employee.DoesNotExist:
                     # will be triggered when the new manager is None
                     logger.debug("new managers doesn't exist yet")
+
+In the above implementation, what I am proud of is to use **manager change** of employee as **perm assign/remove trigger**, instead **employee's member change** or others. I feel django-mptt is powerful tool handling such issue.
