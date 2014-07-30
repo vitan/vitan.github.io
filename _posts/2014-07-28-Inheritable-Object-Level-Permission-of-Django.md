@@ -36,7 +36,9 @@ Implementation
 Here I am directly giving the source code with some comments on the detail implementation. And it is rather easy to describe that in the *Employee* model:
         
         import logging
-        # I have implemented the [bulk_*](https://github.com/vitan/django-guardian) around django-guardian by myself as the latest upstream version didn't implement such bulk action yet. trying to contribute my work [pull request](https://github.com/lukaszb/django-guardian/pull/245) to upstream.
+        # I have implemented the [bulk_*](https://github.com/vitan/django-guardian) around django-guardian
+        # by myself as the latest upstream haven't implement such bulk action yet. trying to contribute 
+        # my work [pull request](https://github.com/lukaszb/django-guardian/pull/245) to upstream.
         from guardian.shortcuts import bulk_remove_perm, bulk_assign_perm
 
         from django.contrib.auth.models import AbstractUser
@@ -56,15 +58,16 @@ Here I am directly giving the source code with some comments on the detail imple
                     try:
                         obj = Employee.objects.get(pk=self.pk)
                         if obj.manager:
-                            #Record the old manager pk in memory for future perm remove.
+                            # Record the old manager pk in memory for future perm remove.
                             old_manager_pk = obj.manager.pk
                         except Employee.DoesNotExist:
                             pass
 
                 super(Employee, self).save(*args, **kwargs)
 
-                #Record the new manager pk in memory for future perm assign.
+                # Record the new manager pk in memory for future perm assign.
                 new_manager_pk = self.manager.pk if self.manager else None
+                # Trigger function _manager_change once the manager changed
                 if new_manager_pk != old_manager_pk:
                     self._manager_change(old_manager_pk, new_manager_pk)
             
@@ -75,17 +78,25 @@ Here I am directly giving the source code with some comments on the detail imple
                 Note: plz keep the bulk_remove_perm() function called before bulk_assign_perm()
                 """
 
-                #Using MPTT api, quickly query out the current employee's descendants for his/her old manager perm removing.
+                # Using MPTT api, quickly query out the current employee's descendants for his/her 
+                # old manager perm removing.
                 descendants = self.get_descendants(include_self=True)
                 try:
                     ancestors = Employee.objects.get(pk=old_manager_pk).get_ancestors(include_self=True)
                     bulk_remove_perm('change_employee_info', ancestors, descendants)
                 except Employee.DoesNotExist:
+                    # will be triggered when a new record inserted
                     logger.debug("old managers doesn't exist yet!")
 
                 try:
-                    #Also using MPTT api, quickly query out the new manager's ancestors for his/her perm assigning.
+                    # Also using MPTT api, quickly query out the new manager's ancestors for
+                    # his/her perm assigning.
                     ancestors = Employee.objects.get(pk=new_manager_pk).get_ancestors(include_self=True)
+                    # Obviously, the inheritance of perm is causing DUPLICATE permission records inserted into
+                    # *Permission* model which will causing sql error. In my real project, I am using raw sql to
+                    # IGNORE the DUPLICATE permission records and forcely insert them, refering
+                    # [Django Bulk Insert Manager for ON DUPLICATE IGNORE and ON DUPLICATE KEY in MySQL](https://gist.github.com/datamafia/9671827)
                     bulk_assign_perm('change_employee_info', ancestors, descendants)
                 except Employee.DoesNotExist:
+                    # will be triggered when the new manager is None
                     logger.debug("new managers doesn't exist yet")
