@@ -58,11 +58,11 @@ Docker核心是一个操作系统级虚拟化方法, 理解起来可能并不像
 
 每个用户实例之间相互隔离, 互不影响。 一般的硬件虚拟化方法给出的方法是VM，而LXC给出的方法是container，更细一点讲就是kernel namespace。其中pid、net、ipc、mnt、uts、user等namespace将container的进程、网络、消息、文件系统、UTS("UNIX Time-sharing System")和用户空间隔离开。
 
-####文件系统隔离：每个进程容器运行在一个完全独立的根文件系统里
+####1. 文件系统隔离：每个进程容器运行在一个完全独立的根文件系统里
 
 类似chroot，将一个进程放到一个特定的目录执行。mnt namespace允许不同namespace的进程看到的文件结构不同，这样每个 namespace 中的进程所看到的文件目录就被隔离开了。同chroot不同，每个namespace中的container在/proc/mounts的信息只包含所在namespace的mount point。
 
-####资源隔离：系统资源，像CPU和内存等可以分配到不同的容器中，使用cgroup
+####2. 资源隔离：系统资源，像CPU和内存等可以分配到不同的容器中，使用cgroup
 
 cgroups 实现了对资源的配额和度量。cgroups的使用非常简单，提供类似文件的接口，在/cgroup目录下新建一个文件夹即可新建一个group，在此文件夹中新建task文件，并将pid写入该文件，即可实现对该进程的资源控制。groups可以限制blkio、cpu、cpuacct、cpuset、devices、freezer、memory、net_cls、ns九大子系统的资源，以下是每个子系统的详细说明：
 
@@ -78,13 +78,13 @@ cgroups 实现了对资源的配额和度量。cgroups的使用非常简单，�
 
 以上九个子系统之间也存在着一定的关系.
 
-####网络隔离：每个进程容器运行在自己的网络空间，虚拟接口和IP地址
+####3. 网络隔离：每个进程容器运行在自己的网络空间，虚拟接口和IP地址
 
 不同用户的进程就是通过pid namespace隔离开的，有了pid namespace, 每个namespace中的pid能够相互隔离，但是网络端口还是共享host的端口。网络隔离是通过net namespace实现的， 每个net namespace有独立的network devices, IP addresses, IP routing tables, /proc/net目录。这样每个container的网络就能隔离开来。docker默认采用veth的方式将container中的虚拟网卡同host上的一个docker bridge: docker0连接在一起。
 
 UTS("UNIX Time-sharing System") namespace允许每个container拥有独立的hostname和domain name, 使其在网络上可以被视作一个独立的节点而非Host上的一个进程。
 
-####用户隔离： 每个进程容器可以有不同的user和group id
+####4. 用户隔离： 每个进程容器可以有不同的user和group id
 
 也就是说可以在container内部用container内部的用户执行程序而非Host上的用户。
 
