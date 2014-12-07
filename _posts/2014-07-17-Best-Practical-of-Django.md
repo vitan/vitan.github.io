@@ -5,7 +5,7 @@ tags: Django python
 categories: Linux Django practical python
 ---
 
-As a heavy user of Django, here I'd like to share some experiences based on my owner Django working practice.
+As a heavy user of Django, here I'd like to share some experiences based on my own Django working practice.
 
 Try to implement it at the right level, or avoid to cumulate codes in views.py/forms.py
 ---------------------------------------------------------------------------------------
