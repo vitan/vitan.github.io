@@ -11,6 +11,7 @@ categories: algorithm python
  - 在push操作时，会比较__max最后一个值与将要压入的值的大小，大于等于 则append到__max中
  - 在pop操作时，会比较__max最后一个值与弹出的值的大小，等于则remove掉__max[-1]
 
+类定义如下：
 
     class Stack(object):
         def __init__(self, size):
