@@ -1,12 +1,13 @@
 ---
 layout: post
-title: Implement python stack with O(1) time complexity of push/pop/max
+title: Implement python stack in which the operation push/pop/max must match O(1) time complexity
 tags: algorithm python
 categories: algorithm python
 ---
 
 直入主题，在python下利用list实现一个stack，要求操作push/pop/max的时间复杂度为O(1)。
 问题的关键是怎么保证stack.max()的时间复杂度是O(1)，这里程序维护了一个__max的list：
+ 
  - 在push操作时，会比较__max最后一个值与将要压入的值的大小，大于等于 则append到__max中
  - 在pop操作时，会比较__max最后一个值与弹出的值的大小，等于则remove掉__max[-1]
 
