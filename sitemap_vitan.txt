@@ -1,0 +1,8 @@
+http://vitan.github.io/algorithm/python/2014/12/09/implement_stack_using_list_in_python.html
+http://vitan.github.io/practical/python/algorithm/2014/12/07/solution_diff_of_getting_max_prime.html
+http://vitan.github.io/linux/2014/08/17/Distributed-System.html
+http://vitan.github.io/linux/2014/08/16/Docker-Get-Started.html
+http://vitan.github.io/linux/django/practical/python/2014/07/28/Inheritable-Object-Level-Permission-of-Django.html
+http://vitan.github.io/linux/django/practical/python/2014/07/17/Best-Practical-of-Django.html
+http://vitan.github.io/linux/2013/07/15/rhel6-mailserver-MTA-postfix-MDA-dovecot.html
+http://vitan.github.io/linux/2013/06/27/rhel6-apache-deploy.html
