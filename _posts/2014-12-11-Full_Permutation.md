@@ -1,4 +1,9 @@
-
+---
+layout: post
+title: Implement full permutation in Python
+tags: Algorithm python
+categories: Algorithm python
+---
 
 
     def permutation(operate_list, m, n):
