@@ -5,6 +5,11 @@ tags: Algorithm python
 categories: Algorithm python
 ---
 
+算法题，利用Python实现一个全排列算法。要求：
+1）实现一个递归的全排列算法
+2）在1）的基础上加上去重功能（有bug）
+3）实现一个非递归的全排列算法（未实现）
+
 
     def permutation(operate_list, m, n):
         if m == n-1:
