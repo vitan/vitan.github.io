@@ -12,6 +12,9 @@ categories: Algorithm python
 3. 实现一个非递归的全排列算法（未实现）
 
 
+代码如下：
+
+
     def permutation(operate_list, m, n):
         if m == n-1:
             print operate_list
