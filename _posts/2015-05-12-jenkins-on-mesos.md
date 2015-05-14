@@ -44,10 +44,11 @@ TODO
 
   *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
   
-  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page``http://192.168.3.1:8080``，我们会在marathon运行的实例列表中看到app jenkins，详细信息如下图所示：
+  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page ``http://192.168.3.1:8080``，我们会在marathon运行的实例列表中看到app jenkins，详细信息如下图所示：
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
 
+  另外，我们也可以通过下图来了解marathon framework是如何在Mesos上运行Jenkins Master的![Linked from ahunnargikar.files.wordpress.com临时占位](http://ahunnargikar.files.wordpress.com/2014/03/mesos3.png)
 
 配置Jenkins Master实现弹性伸缩
 ==============================
