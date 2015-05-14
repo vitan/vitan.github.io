@@ -46,7 +46,7 @@ TODO
   
   如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page``http://192.168.3.1:8080``，我们会在marathon运行的实例列表中看到app jenkins，详细信息如下图所示：
 
-
+  ![Jenkins Master实例信息]({{ site.url }}/assets/jenkins-master-on-marathon.png)
 
 
 配置Jenkins Master实现弹性伸缩
