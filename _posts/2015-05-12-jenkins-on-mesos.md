@@ -44,7 +44,7 @@ TODO
 
   *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
   
-  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page``http://192.168.3.1:8080``，我们会看到jenkins master出现在marathon的正在运行的实例列表中，如下图所示：
+  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page``http://192.168.3.1:8080``，我们会在marathon运行的实例列表中看到app jenkins，详细信息如下图所示：
 
 
 
