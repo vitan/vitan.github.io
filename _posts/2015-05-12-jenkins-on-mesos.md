@@ -8,3 +8,31 @@ categories: scale CI
   持续集成(CI)是一种软件开发实践，使用得当，它会极大的提高软件开发效率并保障软件开发质量。Jenkins 是一个开源项目，提供了一种易于使用的持续集成系统；Mesos是Apache下的一个开源分布式资源管理框架，它被称为是分布式系统的内核；Marathon是Apache Mesos的一个管理长时应用(long-running applications)的framework，如果把Mesos比作数据中心kernel的话，那么Marathon就是init或者upstart的daemon。
 
   本文旨在探讨如何利用Jenkins，Apache Mesos和Marathon构建一套弹性的，高可用的持续集成环境。
+  
+
+为什么要把Jenkins运行到Apache Mesos上
+=====================================
+
+TODO
+
+在Marathon上部署Jenkins的master实例
+===================================
+
+TODO
+
+配置Jenkins Master实现弹性伸缩
+==============================
+
+TODO
+
+利用git repo实现持久化保证系统高可用
+==============================
+
+TODO
+
+总结
+====
+
+TODO
+
+
