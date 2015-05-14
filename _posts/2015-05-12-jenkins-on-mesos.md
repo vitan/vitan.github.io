@@ -15,6 +15,20 @@ categories: scale CI
 
 TODO
 
+环境设置
+========
+
+  为了便于理解，这里我简化了Mesos/Marathon集群的架构，不再考虑集群本身的高可用性。至于如何利用zookeeper配置高可用的mesos/marathon集群，可以参考![Mesosphere的官方文档](https://mesos.apache.org/documentation/latest/mesos-architecture/)，这里不再展开。
+
+  假设我有10个节点 ``192.168.3.1-192.168.3.10``，其中一个节点用作Marthon及Mesos-master，其它9个节点作为mesos的slave，如下所示。
+
+    192.168.3.1  marathon/mesos-master
+    192.168.3.2  mesos-slave
+    192.168.3.3  mesos-slave
+    ......
+    192.168.3.10  mesos-slave
+  
+
 在Marathon上部署Jenkins的master实例
 ===================================
 
