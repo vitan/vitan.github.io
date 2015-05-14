@@ -18,7 +18,7 @@ TODO
 环境设置
 ========
 
-  为了便于理解，这里我简化了Mesos/Marathon集群的架构，不再考虑集群本身的高可用性。至于如何利用zookeeper配置高可用的mesos/marathon集群，可以参考![Mesosphere的官方文档](https://mesos.apache.org/documentation/latest/mesos-architecture/)，这里不再展开。
+  为了便于理解，这里我简化了Mesos/Marathon集群的架构，不再考虑集群本身的高可用性。至于如何利用zookeeper配置高可用的mesos/marathon集群，可以参考[Mesosphere的官方文档](https://mesos.apache.org/documentation/latest/mesos-architecture/)，这里不再展开。
 
   假设我有10个节点 ``192.168.3.1-192.168.3.10``，其中一个节点用作Marthon及Mesos-master，其它9个节点作为mesos的slave，如下所示。
 
@@ -32,7 +32,22 @@ TODO
 在Marathon上部署Jenkins的master实例
 ===================================
 
-TODO
+  Marathon支持web页面或者RESTapi两种方式发布应用，在``192.168.3.＊``内网执行下面的bash命令，就会通过Marathon的RESTapi在mesos slave上启动一个Jenkins master实例。
+
+    git clone git@github.com:Dataman-Cloud/jenkins-on-mesos.git && cd jenkins-on-mesos && curl -v -X POST \
+    -H 'Accept: application/json' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    -H 'Content-Type: application/json; charset=utf-8' \
+    -H 'User-Agent: HTTPie/0.8.0' \
+    -d@marathon.json \
+    http://192.168.3.1:8080/v2/apps
+
+  *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
+  
+  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page``http://192.168.3.1:8080``，我们会看到jenkins master出现在marathon的正在运行的实例列表中，如下图所示：
+
+
+
 
 配置Jenkins Master实现弹性伸缩
 ==============================
