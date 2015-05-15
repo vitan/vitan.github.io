@@ -60,10 +60,10 @@ TODO
 配置Jenkins Master实现弹性伸缩
 ==============================
 
-TODO
+  接下来是通过配置Jenkins来让Jenkins注册成为Mesos的Framework。下面的截图是我通过Jenkins Master的Web UI逐步配置的过程。
 
 利用git repo实现持久化保证系统高可用
-==============================
+====================================
 
 TODO
 
