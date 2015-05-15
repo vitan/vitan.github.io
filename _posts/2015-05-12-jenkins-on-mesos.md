@@ -65,6 +65,10 @@ TODO
   <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
   <img src="/assets/jenkins-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置页面"/>
   <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 450px;" alt="Jenkins Master配置Mesos"/>
+  
+###配置Jenkins Slave参数(可选)
+
+  在使用Jenkins进行项目构建时，我们经常会面临这样一种情形，不同的作业对slave的性能有不同的要求，有些作业需要在配置很高的slave机器上运行，但是有些则不需要。为了提高资源利用率，显然，我们需要一种手段来向不同的作业分配不同的资源。通过设置Jenkins Mesos Cloud插件的slave info，我们可以很快的满足上述需求。 具体的配置如下图所示： 
 
 利用git repo实现持久化保证系统高可用
 ====================================
