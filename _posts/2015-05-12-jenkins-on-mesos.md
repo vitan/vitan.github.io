@@ -20,13 +20,13 @@ TODO
 
   为了便于理解，这里我简化了Mesos/Marathon集群的架构，不再考虑集群本身的高可用性。至于如何利用zookeeper配置高可用的mesos/marathon集群，可以参考[Mesosphere的官方文档](https://mesos.apache.org/documentation/latest/mesos-architecture/)，这里不再展开。
 
-  假设我有10个节点 ``192.168.3.1-192.168.3.10``，其中一个节点用作Marthon及Mesos-master，其它9个节点作为mesos的slave，如下所示。
+  假设我有40个节点 ``192.168.3.4-192.168.3.43``，其中一个节点用作Marthon及Mesos-master，其它39个节点作为mesos的slave，如下所示。
 
-    192.168.3.1  marathon/mesos-master
-    192.168.3.2  mesos-slave
-    192.168.3.3  mesos-slave
+    192.168.3.4  marathon/mesos-master
+    192.168.3.5  mesos-slave
+    192.168.3.6  mesos-slave
     ......
-    192.168.3.10  mesos-slave
+    192.168.3.43  mesos-slave
   
 
 在Marathon上部署Jenkins的master实例
@@ -40,11 +40,11 @@ TODO
     -H 'Content-Type: application/json; charset=utf-8' \
     -H 'User-Agent: HTTPie/0.8.0' \
     -d@marathon.json \
-    http://192.168.3.1:8080/v2/apps
+    http://192.168.3.4:8080/v2/apps
 
   *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
   
-  如果Jenkins master实例被成功部署，通过浏览器访问marathon的web page ``http://192.168.3.1:8080``，我们会在marathon运行的实例列表中看到app jenkins，详细信息如下图所示：
+  如果Jenkins master实例被成功部署，通过浏览器访问 ``http://192.168.3.4:8080``可以在running tasks列表中找到 jenkins，点击进入详细信息页面，我们会看到下图：
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
 
@@ -60,6 +60,7 @@ TODO
 
 TODO
 
+基于Marathon 0.8? Mesos-version, Jenkins Version
 总结
 ====
 
