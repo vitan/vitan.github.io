@@ -10,13 +10,11 @@ categories: scale CI
   本文旨在探讨如何利用Jenkins，Apache Mesos和Marathon构建一套弹性的，高可用的持续集成环境。
   
 
-为什么要把Jenkins运行到Apache Mesos上
-=====================================
+###为什么要把Jenkins运行到Apache Mesos上
 
 TODO
 
-环境设置
-========
+###环境设置
 
   为了便于理解，这里我简化了Mesos/Marathon集群的架构，不再考虑集群本身的高可用性。至于如何利用zookeeper配置高可用的mesos/marathon集群，可以参考[Mesosphere的官方文档](https://mesos.apache.org/documentation/latest/mesos-architecture/)，这里不再展开。
 
@@ -29,8 +27,7 @@ TODO
     192.168.3.43  mesos-slave
   
 
-在Marathon上部署Jenkins的master实例
-===================================
+###在Marathon上部署Jenkins的master实例
 
   Marathon支持web页面或者RESTapi两种方式发布应用，在``192.168.3.＊``内网执行下面的bash命令，就会通过Marathon的RESTapi在mesos slave上启动一个Jenkins master实例。
 
@@ -48,7 +45,7 @@ TODO
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
 
-  访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，我会在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
+  访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，可以在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
   <img src="/assets/jenkins-master-on-mesos-slave.png" style="width: 750px; height: 450px;" alt="Jenkins Master运行在mesos slave上"/>
 
   点击sandbox
@@ -57,8 +54,7 @@ TODO
 
   另外，下图很好的解释了marathon framework是如何在Mesos上运行Jenkins Master的![Linked from ahunnargikar.files.wordpress.com临时占位](http://ahunnargikar.files.wordpress.com/2014/03/mesos3.png)
 
-配置Jenkins Master实现弹性伸缩
-==============================
+###配置Jenkins Master实现弹性伸缩
 
   接下来是通过配置Jenkins来让Jenkins注册成为Mesos的Framework。通过浏览器访问``[http://192.168.3.25:31052/](http://192.168.3.25:31052/)``,下面的截图是我通过Jenkins Master的Web UI逐步配置的过程。
 
@@ -70,24 +66,22 @@ TODO
 
   <img src="/assets/jenkins-framework-on-mesos.png" style="width: 750px; height: 350px;" alt="Jenkins Framework on Mesos"/>
   
-###配置Jenkins Slave参数(可选)
+####配置Jenkins Slave参数(可选)
 
   在使用Jenkins进行项目构建时，我们经常会面临这样一种情形，不同的作业对slave的性能有不同的要求，有些作业需要在配置很高的slave机器上运行，但是有些则不需要。为了提高资源利用率，显然，我们需要一种手段来向不同的作业分配不同的资源。通过设置Jenkins Mesos Cloud插件的slave info，我们可以很容易的满足上述要求。 具体的配置如下图所示：
 
   <img src="/assets/jenkins-config-slave.png" style="width: 750px; height: 450px;" alt="Jenkins 配置 slave"/>
 
-利用git repo实现持久化保证系统高可用
-====================================
+###利用git repo实现持久化保证系统高可用
 
 TODO
 
 基于Marathon 0.8? Mesos-version, Jenkins Version
-总结
-====
+
+###总结
 
 TODO
 
-参考
-====
+###参考
 
 [delivering-ebays-ci-solution-with-apache-mesos](http://www.ebaytechblog.com/2014/05/12/delivering-ebays-ci-solution-with-apache-mesos-part-ii/)
