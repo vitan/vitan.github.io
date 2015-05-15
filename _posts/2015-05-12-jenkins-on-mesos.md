@@ -64,11 +64,11 @@ TODO
 
   <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
   <img src="/assets/jenkins-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置页面"/>
-  <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 450px;" alt="Jenkins Master配置Mesos"/>
+  <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置Mesos"/>
 
   如果Jenkins在Mesos上注册成功，访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``，我们可以找到jenkins Framework，如下图所示：
 
-  <img src="/assets/jenkins-framework-on-mesos.png" style="width: 750px; height: 450px;" alt="Jenkins Framework on Mesos"/>
+  <img src="/assets/jenkins-framework-on-mesos.png" style="width: 750px; height: 350px;" alt="Jenkins Framework on Mesos"/>
   
 ###配置Jenkins Slave参数(可选)
 
