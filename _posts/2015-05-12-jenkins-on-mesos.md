@@ -70,6 +70,8 @@ TODO
 
   在使用Jenkins进行项目构建时，我们经常会面临这样一种情形，不同的作业对slave的性能有不同的要求，有些作业需要在配置很高的slave机器上运行，但是有些则不需要。为了提高资源利用率，显然，我们需要一种手段来向不同的作业分配不同的资源。通过设置Jenkins Mesos Cloud插件的slave info，我们可以很快的满足上述需求。 具体的配置如下图所示： 
 
+  <img src="/assets/jenkins-config-slave.png" style="width: 750px; height: 450px;" alt="Jenkins 配置 slave"/>
+
 利用git repo实现持久化保证系统高可用
 ====================================
 
