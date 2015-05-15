@@ -47,10 +47,15 @@ TODO
   如果Jenkins master实例被成功部署，通过浏览器访问 ``http://192.168.3.4:8080``可以在running tasks列表中找到 jenkins，点击进入详细信息页面，我们会看到下图：
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
+
+  访问``http://192.168.3.4:5050/#/frameworks``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，我会在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
   <img src="/assets/jenkins-master-on-mesos-slave.png" style="width: 750px; height: 450px;" alt="Jenkins Master运行在mesos slave上"/>
+
+  点击sandbox
+
   <img src="/assets/jenkins-master-on-mesos-slave-2.png" style="width: 750px; height: 300px;" alt="Jenkins Master运行在mesos slave上"/>
 
-  另外，我们也可以通过下图来了解marathon framework是如何在Mesos上运行Jenkins Master的![Linked from ahunnargikar.files.wordpress.com临时占位](http://ahunnargikar.files.wordpress.com/2014/03/mesos3.png)
+  另外，下图很好的解释了marathon framework是如何在Mesos上运行Jenkins Master的![Linked from ahunnargikar.files.wordpress.com临时占位](http://ahunnargikar.files.wordpress.com/2014/03/mesos3.png)
 
 配置Jenkins Master实现弹性伸缩
 ==============================
