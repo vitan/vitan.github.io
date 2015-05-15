@@ -44,11 +44,11 @@ TODO
 
   *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
   
-  如果Jenkins master实例被成功部署，通过浏览器访问 ``http://192.168.3.4:8080``可以在running tasks列表中找到 jenkins，点击进入详细信息页面，我们会看到下图：
+  如果Jenkins master实例被成功部署，通过浏览器访问 ``[http://192.168.3.4:8080](http://192.168.3.4:8080)``(**请确定你的浏览器能够访问内网，如果不能，可以利用设置浏览器代理等方式来搞定**)可以在running tasks列表中找到 jenkins，点击进入详细信息页面，我们会看到下图：
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
 
-  访问``http://192.168.3.4:5050/#/frameworks``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，我会在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
+  访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，我会在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
   <img src="/assets/jenkins-master-on-mesos-slave.png" style="width: 750px; height: 450px;" alt="Jenkins Master运行在mesos slave上"/>
 
   点击sandbox
@@ -60,15 +60,19 @@ TODO
 配置Jenkins Master实现弹性伸缩
 ==============================
 
-  接下来是通过配置Jenkins来让Jenkins注册成为Mesos的Framework。下面的截图是我通过Jenkins Master的Web UI逐步配置的过程。
+  接下来是通过配置Jenkins来让Jenkins注册成为Mesos的Framework。通过浏览器访问``[http://192.168.3.25:31052/](http://192.168.3.25:31052/)``,下面的截图是我通过Jenkins Master的Web UI逐步配置的过程。
 
   <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
   <img src="/assets/jenkins-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置页面"/>
   <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 450px;" alt="Jenkins Master配置Mesos"/>
+
+  如果Jenkins在Mesos上注册成功，访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``，我们可以找到jenkins Framework，如下图所示：
+
+  <img src="/assets/jenkins-framework-on-mesos.png" style="width: 750px; height: 450px;" alt="Jenkins Framework on Mesos"/>
   
 ###配置Jenkins Slave参数(可选)
 
-  在使用Jenkins进行项目构建时，我们经常会面临这样一种情形，不同的作业对slave的性能有不同的要求，有些作业需要在配置很高的slave机器上运行，但是有些则不需要。为了提高资源利用率，显然，我们需要一种手段来向不同的作业分配不同的资源。通过设置Jenkins Mesos Cloud插件的slave info，我们可以很快的满足上述需求。 具体的配置如下图所示： 
+  在使用Jenkins进行项目构建时，我们经常会面临这样一种情形，不同的作业对slave的性能有不同的要求，有些作业需要在配置很高的slave机器上运行，但是有些则不需要。为了提高资源利用率，显然，我们需要一种手段来向不同的作业分配不同的资源。通过设置Jenkins Mesos Cloud插件的slave info，我们可以很容易的满足上述要求。 具体的配置如下图所示：
 
   <img src="/assets/jenkins-config-slave.png" style="width: 750px; height: 450px;" alt="Jenkins 配置 slave"/>
 
