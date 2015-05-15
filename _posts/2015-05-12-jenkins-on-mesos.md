@@ -73,4 +73,7 @@ TODO
 
 TODO
 
+参考
+====
 
+[delivering-ebays-ci-solution-with-apache-mesos](http://www.ebaytechblog.com/2014/05/12/delivering-ebays-ci-solution-with-apache-mesos-part-ii/)
