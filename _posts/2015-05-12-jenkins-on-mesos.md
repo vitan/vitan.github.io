@@ -62,6 +62,10 @@ TODO
 
   接下来是通过配置Jenkins来让Jenkins注册成为Mesos的Framework。下面的截图是我通过Jenkins Master的Web UI逐步配置的过程。
 
+  <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
+  <img src="/assets/jenkins-configure.png" style="width: 750px; height: 450px;" alt="Jenkins Master配置页面"/>
+  <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 450px;" alt="Jenkins Master配置Mesos"/>
+
 利用git repo实现持久化保证系统高可用
 ====================================
 
