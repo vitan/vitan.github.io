@@ -19,7 +19,7 @@ categories: scale CI
  下面两张图形象的说明了Marathon将Jenkins Master部署到Mesos资源池，以及Jenkins Master使用Mesos资源池进行作业构建的整个过程。 
 
   <img src="/assets/how-marathon-run-jenkins-on-mesos.png" style="width: 630px; height: 200px;" alt="Jenkins Master实例信息"/>
-  <img src="/assets/how-jenkins-master-on-mesos.png" style="width: 630px; height: 200px;" alt="Jenkins Master运行在Mesos上"/>
+  <img src="/assets/how-jenkins-master-run-on-mesos.png" style="width: 630px; height: 200px;" alt="Jenkins Master运行在Mesos上"/>
 
 ###环境设置
 
