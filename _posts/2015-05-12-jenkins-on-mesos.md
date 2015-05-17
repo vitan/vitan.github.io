@@ -90,8 +90,8 @@ categories: scale CI
 
   正在使用的slave节点的详细信息
 
-  <img src="/assets/jenkins-slave-detail.png" style="width: 750px; height: 450px;" alt="Jenkins slave on mesos"/>
-  <img src="/assets/jenkins-slave.png" style="width: 750px; height: 450px;" alt="Jenkins slave详细信息"/>
+  <img src="/assets/jenkins-slave-detail.png" style="width: 750px; height: 400px;" alt="Jenkins slave on mesos"/>
+  <img src="/assets/jenkins-slave.png" style="width: 750px; height: 300px;" alt="Jenkins slave详细信息"/>
   
 ####配置Jenkins Slave参数(可选)
 
