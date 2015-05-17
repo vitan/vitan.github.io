@@ -50,11 +50,11 @@ categories: scale CI
 
   *这里我在github上fork了[mesosphere的jenkins-on-mesos的repo](https://github.com/mesosphere/jenkins-on-mesos)到[DataMan-Cloud/jenkins-on-mesos](https://github.com/Dataman-Cloud/jenkins-on-mesos)，并进行了一些[改进](https://github.com/Dataman-Cloud/jenkins-on-mesos/commits?author=vitan)。*
   
-  如果Jenkins master实例被成功部署，通过浏览器访问 ``[http://192.168.3.4:8080](http://192.168.3.4:8080)``(**请确定你的浏览器能够访问内网，如果不能，可以利用设置浏览器代理等方式来搞定**)可以在running tasks列表中找到jenkins，点击进入详细信息页面，我们会看到下图：
+  如果Jenkins master实例被成功部署，通过浏览器访问[http://192.168.3.4:8080](http://192.168.3.4:8080)(**请确定你的浏览器能够访问内网，如果不能，可以利用设置浏览器代理等方式来搞定**)可以在running tasks列表中找到jenkins，点击进入详细信息页面，我们会看到下图：
 
   <img src="/assets/jenkins-master-on-marathon.png" style="width: 750px; height: 450px;" alt="Jenkins Master实例信息"/>
 
-  访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，可以在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
+ 访问[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)并在**Active Frameworks**中找到Marathon，点击进入详细信息页面，可以在该页面找到Jenkins Master具体运行到Mesos哪一台Slave上，如下图所示：
 
   <img src="/assets/jenkins-master-on-mesos-slave.png" style="width: 750px; height: 450px;" alt="Jenkins Master运行在mesos slave上"/>
 
@@ -65,13 +65,13 @@ categories: scale CI
 
 ###配置Jenkins Master实现弹性伸缩
 
-  接下来是配置Jenkins注册成为Mesos的Framework，需要通过浏览器访问``[http://192.168.3.25:31052/](http://192.168.3.25:31052/)``来到Jenkins Master的UI页面。下面的截图是我逐步配置的全过程。
+  接下来是配置Jenkins注册成为Mesos的Framework，需要通过浏览器访问[http://192.168.3.25:31052/](http://192.168.3.25:31052/)来到Jenkins Master的UI页面。下面的截图是我逐步配置的全过程。
 
   <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
   <img src="/assets/jenkins-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置页面"/>
   <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置Mesos"/>
 
-  如果Jenkins在Mesos上注册成功，访问``[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)``，我们可以找到jenkins Framework，如下图所示：
+  如果Jenkins在Mesos上注册成功，访问[http://192.168.3.4:5050/#/frameworks](http://192.168.3.4:5050/#/frameworks)，我们可以找到jenkins Framework，如下图所示：
 
   <img src="/assets/jenkins-framework-on-mesos.png" style="width: 750px; height: 300px;" alt="Jenkins Framework on Mesos"/>
 
