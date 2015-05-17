@@ -5,14 +5,18 @@ tags: Jenkins Mesos CI scale
 categories: scale CI
 ---
 
-  持续集成(CI)是一种软件开发实践，使用得当，它会极大的提高软件开发效率并保障软件开发质量。Jenkins 是一个开源项目，提供了一种易于使用的持续集成系统；Mesos是Apache下的一个开源分布式资源管理框架，它被称为是分布式系统的内核；Marathon是Apache Mesos的一个管理长时应用(long-running applications)的framework，如果把Mesos比作数据中心kernel的话，那么Marathon就是init或者upstart的daemon。
+  **持续集成(CI)**是一种软件开发实践，使用得当，它会极大的提高软件开发效率并保障软件开发质量；**Jenkins**是一个开源项目，它提供了一种易于使用的持续集成系统；**Mesos**是Apache下的一个开源的统一资源管理与调度平台，它被称为是分布式系统的内核；**Marathon**是注册到Apache Mesos上的管理长时应用(long-running applications)的framework，如果把Mesos比作数据中心kernel的话，那么Marathon就是init或者upstart的daemon。
 
-  本文旨在探讨如何利用Jenkins，Apache Mesos和Marathon构建一套弹性的，高可用的持续集成环境。
+  本文旨在探讨如何利用Jenkins，Apache Mesos和Marathon搭建一套**弹性**的，**高可用**的持续集成环境。
   
 
 ###为什么要把Jenkins运行到Apache Mesos上
 
-TODO
+  把Jenkins运行到Apache Mesos上，或者说利用Apache Mesos向Jenkins提供slave资源，最主要的目的是利用Mesos的弹性资源分配来提高资源利用率。通过配置**Jenkins-on-Mesos**插件，Jenkins Master可以在作业构建时根据实际需要动态的向Mesos申请slave节点，并在构建完成的一段时间后将节点归还给mesos。
+
+  同时，Marathon会对发布到它之上的应用程序进行健康检查，从而在应用程序由于某些原因意外崩溃后自动重启该应用。这样，选择利用Marathon管理Jenkins Master保证了该构建系统的全局高可用。而且，Jenkins Master本身也通过Marathon部署运行在Mesos资源池内，进一步实现了资源共享，提高了资源利用率。
+
+ 下面两张图形象的说明了Marathon将Jenkins Master部署到Mesos资源池，以及Jenkins Master使用Mesos资源池进行作业构建的整个过程。 
 
 ###环境设置
 
