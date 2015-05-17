@@ -67,7 +67,6 @@ categories: scale CI
 
   接下来是配置Jenkins注册成为Mesos的Framework，需要通过浏览器访问[http://192.168.3.25:31052/](http://192.168.3.25:31052/)来到Jenkins Master的UI页面。下面的截图是我逐步配置的全过程。
 
-  <img src="/assets/jenkins-home.png" style="width: 750px; height: 450px;" alt="Jenkins Master Home"/>
   <img src="/assets/jenkins-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置页面"/>
   <img src="/assets/jenkins-mesos-configure.png" style="width: 750px; height: 400px;" alt="Jenkins Master配置Mesos"/>
 
