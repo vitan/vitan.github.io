@@ -53,4 +53,17 @@ categories: scale CI
   bash start-jenkins.app.sh
   ```
 
-  来让 marathon 部署我们的 Jenkins Master 了。
+  来让 marathon 部署我们的 Jenkins Master 了。这样， 我们在 Jenkins Master 上所保存的任何配置，创建的任何job都会被**SCM-Sync-Configuration**同步到repo里，并在 Jenkins Master 被重新发布后 download 到本地。
+
+###关于SCM-Sync-Configuration的更多信息
+
+  SCM-Sync-Configuration初始化完成后（在我们环境里初始化过程会被自动触发)，每次配置更新或者添加，编辑构建作业时，我们会得到一个提示页面来为新的 commit message 添加 comment，如下图所示， ![commit comment](https://wiki.jenkins-ci.org/download/attachments/46336078/Jenkins+-+scm-sync-configuration+-+Comment+prompt2.png?version=1&modificationDate=1374219411000)
+
+  当前，所支持的配置文件如下：
+
+  1. 构建作业的配置文件 (/jobs/*/config.xml)
+  2. 全局的 Jenkins/Hudson 系统配置文件 (/config.xml)
+  3. 基本的插件的配置文件 (/hudson*.xml, /scm-sync-configuration.xml)
+  4. 用户手动指定的配置文件
+
+  另外，我们可以在每一页的下面看到 scm sync config 的状态， 下图是同步出错时的截图，你可以去**System Log**查看具体的出错信息。[scm sync status](https://wiki.jenkins-ci.org/download/attachments/46336078/Jenkins+-+scm-sync-config+-+Display+Status.png?version=1&modificationDate=1374219622000)
