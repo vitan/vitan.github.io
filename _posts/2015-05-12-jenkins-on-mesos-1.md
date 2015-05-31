@@ -100,6 +100,10 @@ categories: scale CI
   <img src="/assets/jenkins-config-slave.png" style="width: 750px; height: 450px;" alt="Jenkins 配置 slave"/>
 
 
+###总结
+
+  利用mesos为jenkins弹性的提供资源，同时配置Jenkins Slave的参数来满足不同作业的资源需求，这些都大大提高了集群的资源利用率。另外，由于 Marathon 会自动检查运行在它之上的app的健康状态， 并重新发布崩溃掉的应用程序。 在[基于Jenkins, Apache Mesos和Marathon的弹性高可用的持续集成环境（下篇）](http://vitan.github.io/scale/ci/2015/05/31/jenkins-on-mesos-2.html), 我会提供一种数据持久化的方法来存储 Jenkins Master 的数据， 保证利用 marathon 部署 Jenkins Master 时系统的高可用。
+
 ###参考
 
 [delivering-ebays-ci-solution-with-apache-mesos](http://www.ebaytechblog.com/2014/05/12/delivering-ebays-ci-solution-with-apache-mesos-part-ii/)
