@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基于Jenkins, Apache Mesos和Marathon的弹性高可用的持续集成环境（上篇）
-tags: Jenkins Mesos CI scale
+tags: Jenkins Mesos CI auto-scaling
 categories: scale CI
 ---
 
