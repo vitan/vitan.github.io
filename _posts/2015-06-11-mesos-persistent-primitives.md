@@ -20,3 +20,4 @@ reserved role
 
 du poll或者kernel event
 
+###动态的 slave 属性，framework可编辑
