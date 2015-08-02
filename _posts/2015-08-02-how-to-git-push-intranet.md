@@ -27,10 +27,10 @@ categories: git ssh
           IdentityFile ~/.ssh/id_dataman_rsa
           ProxyCommand nc -x localhost:10000 %h %p
     ```
-  其中， 
-  *. *HostName*: 跳板机的公网 IP .
-  *. *User*: 你在跳板机上的登录账户，或你 ssh 到跳板机所用账户； 对于 `gitlab server`(`Host 192.168.*.*`) 来说，就是你的 gitlab 账户。这里我在跳板机和 gitlab 上使用了相同的账户: `wtzhou`。
-  *. *IdentityFile*: 你 ssh 到相应 `Host` 所用私钥的 `PATH`. 以我的配置文件为例， 我为 Host: `dataman-route` 设置 `ssh` 免密码登录， `~/.ssh/id_dataman_rsa` 就是访问 `10.1.2.3` 所用私钥的地址； 同时我在 `gitlab server` 上为账户 `wtzhou` 添加了相同的公钥，所以 `Host 192.168.*.*`(gitlab server) 的 `IdentityFile` 也是 `~/.ssh/id_dataman_rsa` .
+    其中， 
+    * *HostName*: 跳板机的公网 IP .
+    * *User*: 你在跳板机上的登录账户，或你 ssh 到跳板机所用账户； 对于 `gitlab server`(`Host 192.168.*.*`) 来说，就是你的 gitlab 账户。这里我在跳板机和 gitlab 上使用了相同的账户: `wtzhou`。
+    * *IdentityFile*: 你 ssh 到相应 `Host` 所用私钥的 `PATH`. 以我的配置文件为例， 我为 Host: `dataman-route` 设置 `ssh` 免密码登录， `~/.ssh/id_dataman_rsa` 就是访问 `10.1.2.3` 所用私钥的地址； 同时我在 `gitlab server` 上为账户 `wtzhou` 添加了相同的公钥，所以 `Host 192.168.*.*`(gitlab server) 的 `IdentityFile` 也是 `~/.ssh/id_dataman_rsa` .
 
   2. 打开本地 `ssh tunnel`
 
