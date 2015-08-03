@@ -1,3 +1,4 @@
+http://vitan.github.io/git/ssh/2015/08/02/how-to-git-push-intranet.html
 http://vitan.github.io/mesos/marathon/2015/06/09/how-to-use-marathon-distribute-app.html
 http://vitan.github.io/scale/ci/2015/05/31/jenkins-on-mesos-2.html
 http://vitan.github.io/scale/ci/2015/05/12/jenkins-on-mesos-1.html
