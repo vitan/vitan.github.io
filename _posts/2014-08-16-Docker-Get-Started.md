@@ -101,11 +101,17 @@ UTS("UNIX Time-sharing System") namespace允许每个container拥有独立的hos
 上层的image依赖下层的image，因此Docker中把下层的image称作父image，没有父image的image称作base image。因此想要从一个image启动一个container，Docker会先加载这个image和依赖的父images以及base image，用户的进程运行在writeable的layer中。所有parent image中的数据信息以及 ID、网络和lxc管理的资源限制等具体container的配置，构成一个Docker概念上的container。![AUFS](http://infoqstatic.com/resource/articles/docker-core-technology-preview/zh/resources/0731018.png "AUFS")
 
 
-###日志记录：Docker将会收集和记录每个进程容器的标准流（stdout/stderr/stdin），用于实时检索或批量检索
+###日志记录：
 
-###变更管理：容器文件系统的变更可以提交到新的映像中，并可重复使用以创建更多的容器。无需使用模板或手动配置
+Docker将会收集和记录每个进程容器的标准流（stdout/stderr/stdin），用于实时检索或批量检索
 
-###交互式shell：Docker可以分配一个虚拟终端并关联到任何容器的标准输入上，例如运行一个一次性交互shell。
+###变更管理：
+
+容器文件系统的变更可以提交到新的映像中，并可重复使用以创建更多的容器。无需使用模板或手动配置
+
+###交互式shell：
+
+Docker可以分配一个虚拟终端并关联到任何容器的标准输入上，例如运行一个一次性交互shell。
 
 Docker周边生态系统
 ----------------
@@ -150,7 +156,8 @@ Docker周边生态系统
 * * *
 
   网络上现在对于Docker都是正面评价，Google也声称其每天Start几百几千个Container，但是社区里仍然没有Docker在生产环境上的最佳实践。更多的是看好Docker的未来，以及开发者利用Docker所做的一些Image。
-  从我个人看来，
+
+ 从我个人看来，
 
   1. 我们可以利用Docker的隔离性构建自己纯净的开发环境。并与同事共享开发环境。
   2. 构建本地的PaaS平台来快速的熟悉分布式系统的一些基本配置。
