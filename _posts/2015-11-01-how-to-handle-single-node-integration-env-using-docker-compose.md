@@ -5,9 +5,9 @@ tags: docker-compose micro-service integration-testing
 categories: docker best-practice
 ---
 
-最近在做一个云管理平台，产品初期我们就已经决定使用 docker 容器技术来进行开发环境隔离，以及产品的持续交付部署等，同时也参考了微服务架构的思想，将产品拆成了各个微服务模块。其中涉及到的模块除了标准的 MySQL, Nginx, Redis, RabbitMQ 外还包括了团队开发的 auth, cluster, app, metrics, agent，streaming 和 frontend 等数个模块,  摊子铺得有点儿大。并且不同的模块团队成员在使用 Python，Golang，JS 等不同的开发语言， 随之带来的一个问题就是开发人员如何快速高效的在本地机器将这一套环境搭起来，毕竟要求每个工程师熟悉产品的所有模块的配置是不现实，另外对于前端工程师来说，他们也没有必要花精力在后台的搭建上。
+最近在做一个云管理平台，产品初期我们就已经决定使用 docker 容器技术来进行开发环境隔离，以及产品的持续交付部署等，同时也参考了微服务架构的思想，将产品拆成了各个微服务模块。其中涉及到的模块除了标准的 MySQL, Nginx, Redis, RabbitMQ 外还包括了团队开发的 auth, cluster, app, metrics, agent，streaming 和 frontend 等数个模块,  摊子铺得有点儿大。并且不同的模块团队成员在使用 Python，Golang，JS 等不同的开发语言， 随之带来的一个问题就是开发人员如何快速高效的在本地机器将这一套环境搭起来，毕竟要求每个工程师熟悉产品的所有模块的配置是不现实的，另外对于前端工程师来说，他们也没有必要花精力在后台的搭建上。
 
-为了解决这个问题，前期我尝试通过 `Makefile`，Dockerfile 和各种脚本文件将这些模块组织起来，使用了一段时间后，感觉维护起来非常吃力，无法完全自动化的将一套环境配置起来, 仍然需要人工介入。 后来就开始尝试使用 docker-compose 来将这些模块编排到一块儿，一路下来感觉维护成本小了很多。 一个 `docker-compose.yml` 就将好多脚本工作替掉了。故撰文分享之。
+为了解决这个问题，前期我尝试通过 `Makefile`，`Dockerfile` 和各种脚本文件将这些模块组织起来，使用了一段时间后，感觉维护起来非常吃力，无法完全自动化的将一套环境配置起来, 仍然需要人工介入。 后来就开始尝试使用 `docker-compose` 来将这些模块编排到一块儿，一路下来感觉维护成本小了很多。 一个 `docker-compose.yml` 就将好多脚本工作替掉了。故撰文分享之。
 
 
 ## 代码结构
@@ -53,7 +53,7 @@ categories: docker best-practice
 
 ## docker-compose.yml
 
-首先这里给出部分 ``docker-compose.yml`` 的内容
+这里给出部分 ``docker-compose.yml`` 的内容
 
 ```yml
 glance:
@@ -207,17 +207,17 @@ RUN mkdir /var/log/omega
 CMD ./run.sh create_db; ./run.sh
 ```
 
-另外，我已经在 docker-compose.yml 中声明了将 volumes ./omega/cluster 挂载到容器中的 /code 目录, 同时，由于我的 cluster 模块本身已经支持运行时检测代码改变并自动重启, 所以在开发过程中，我只需将改变保存，立刻就可以测试这些改变。
+另外，我已经在 `docker-compose.yml` 中声明了将 `volumes ./omega/cluster` 挂载到容器中的 `/code` 目录, 同时，由于我的 `cluster` 模块本身已经支持运行时检测代码改变并自动重启, 所以在开发过程中，我只需将改变保存，立刻就可以测试这些改变。
 
 ## 一个小坑
 
-由于 docker 没有 `wait` 机制，即我们在启动容器时无法确定这个容器是在启动中还是已经完全初始化完毕。这也是 docker-compose 目前还未解决的 issue [Is there a way to delay container startup to support dependant services with a longer startup time](https://github.com/docker/compose/issues/374)。对应到我们这里， 由于 mysql 容器启动时需要一段时间，而容器 cluster，auth, app 模块又需要在启动后与 mysql 发生连接，这就可能导致cluster等容器连接一个启动中的MySQL，从而导致启动失败。 我们目前的解决方案是在 cluster，app，auth模块中实现MySQL重连机制，这样，我们可以不停的尝试重连MySQL直到启动成功。
+由于 docker 没有 `wait` 机制，即我们在启动容器时无法确定这个容器是在启动中还是已经完全初始化完毕。这也是 `docker-compose` 目前还未解决的 issue [Is there a way to delay container startup to support dependant services with a longer startup time](https://github.com/docker/compose/issues/374)。对应到我们这里， 由于 mysql 容器启动时需要一段时间，而容器 cluster，auth, app 模块又需要在启动后与 mysql 发生连接，这就可能导致cluster等容器连接一个启动中的MySQL，从而导致启动失败。 我们目前的解决方案是在 cluster，app，auth模块中实现MySQL重连机制，这样，我们可以不停的尝试重连MySQL直到启动成功。
 
 ## 优雅的退出
 
 最后，由于所有的环境都live在容器中，我们可以很方便的推出整个环境，不留一丝残留，只需在终端执行下述命令即可，
 
 ```bash
-    docker-compose -p omega stop
-    docker-compose -p omega rm -f
+docker-compose -p omega stop
+docker-compose -p omega rm -f
 ```
