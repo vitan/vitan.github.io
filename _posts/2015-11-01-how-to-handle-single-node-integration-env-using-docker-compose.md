@@ -140,3 +140,84 @@ bca05fd1abac        rabbitmq:3.5.6                  "/docker-entrypoint.s"   2 d
 ```
 
 至此， 只要 nginx 配置没有问题， 我就可以通过浏览器访问 containers 所在机器的 `8001`，`8000` 端口来使用 market, 或者 glance 服务了。
+
+## 服务发现
+
+玩转 docker-compose 很重要的一点就是 container 之间的发现， 利用好这点，我们可以节省很多配置时间。
+
+### Nginx 是如何发现后台模块的
+
+下面是 nginx-glance.conf 的部分内容
+
+```nginx.conf
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+http {
+    index    index.html;
+    server {
+        listen       80;
+        server_name  glance;
+        root    /usr/share/nginx/html;
+
+        location / {
+          try_files $uri /index.html;
+        }
+        location ~ /api/v1/cluster {
+          auth_request    /_auth;
+          proxy_pass      http://cluster:8888/api/v1/cluster;
+        }
+        location ~ /api/v1/app {
+          auth_request    /_auth;
+          proxy_pass      http://app:8888/api/v1/app;
+        }
+        location = /_auth {
+          internal;
+          proxy_pass http://auth:8888/api/v1/auth;
+          proxy_pass_request_body off;
+          proxy_set_header Content-Length "";
+          proxy_set_header X-Original-URI $request_uri;
+        }
+    }
+}
+```
+
+简单说， 在容器 `omega-glance` 中是可以通过 `auth`, `app`, `cluster` 分别发现容器 `omega-auth`, `omega-app`, `omega-cluster` 的。 `docker-compose` 通过 `/etc/hosts` 的设置保证了这一点。 这样，在任何单机环境中，我们的 nginx 配置文件无须变更。
+
+同理， 我们的 `app`, `auth`, `cluster` 模块也是通过这种方式访问 `mysql`, `rmq` 和 `redis` 服务的， 即，在单机开发环境中，我们的后台模块的配置文件也无需变更。
+
+
+## 提高开发速度
+
+假设我是 cluster 模块的开发， 为了在当前这套结构中快速看到我对 cluster 模块的更改，我通过挂载外部代码目录的方式来解决。下面是 cluster 模块 Dockerfile 的部分内容：
+
+```Dockerfile
+FROM python:3.4
+
+MAINTAINER weitao wtzhou@dataman-inc.com
+
+ADD . /code
+WORKDIR /code
+
+RUN pip3 install -r omega/cluster/requirements.txt
+RUN mkdir /var/log/omega
+CMD ./run.sh create_db; ./run.sh
+```
+
+另外，我已经在 docker-compose.yml 中声明了将 volumes ./omega/cluster 挂载到容器中的 /code 目录, 同时，由于我的 cluster 模块本身已经支持运行时检测代码改变并自动重启, 所以在开发过程中，我只需将改变保存，立刻就可以测试这些改变。
+
+## 一个小坑
+
+由于 docker 没有 `wait` 机制，即我们在启动容器时无法确定这个容器是在启动中还是已经完全初始化完毕。这也是 docker-compose 目前还未解决的 issue [Is there a way to delay container startup to support dependant services with a longer startup time](https://github.com/docker/compose/issues/374)。对应到我们这里， 由于 mysql 容器启动时需要一段时间，而容器 cluster，auth, app 模块又需要在启动后与 mysql 发生连接，这就可能导致cluster等容器连接一个启动中的MySQL，从而导致启动失败。 我们目前的解决方案是在 cluster，app，auth模块中实现MySQL重连机制，这样，我们可以不停的尝试重连MySQL直到启动成功。
+
+## 优雅的退出
+
+最后，由于所有的环境都live在容器中，我们可以很方便的推出整个环境，不留一丝残留，只需在终端执行下述命令即可，
+
+```bash
+    docker-compose -p omega stop
+    docker-compose -p omega rm -f
+```
