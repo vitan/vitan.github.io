@@ -18,7 +18,11 @@ DeviceMapper 这些缺点中影响最大的是容器启动较慢的问题，但�
 将频繁读写的目录挂载到数据盘
 
 [1] [http://developerblog.redhat.com/2014/09/30/overview-storage-scalability-docker/](http://developerblog.redhat.com/2014/09/30/overview-storage-scalability-docker/)
+
 [2] [https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/)
+
 [3] [https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/](https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/)
+
 [4] [http://www.infoq.com/cn/articles/analysis-of-docker-file-system-aufs-and-devicemapper#anch121685](http://www.infoq.com/cn/articles/analysis-of-docker-file-system-aufs-and-devicemapper#anch121685)
+
 [5] [https://www.projectatomic.io/blog/2015/06/notes-on-fedora-centos-and-docker-storage-drivers/](https://www.projectatomic.io/blog/2015/06/notes-on-fedora-centos-and-docker-storage-drivers/)
