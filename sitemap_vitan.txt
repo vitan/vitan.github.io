@@ -1,3 +1,4 @@
+http://vitan.github.io/docker/2016/01/22/aufs-vs-devicemapper.html
 http://vitan.github.io/distributed/system/2015/12/19/how-to-test-apps-denpendency-in-distributed-system.html
 http://vitan.github.io/spark/2015/12/19/spark-FAQ.html
 http://vitan.github.io/books/2015/12/12/booklist.html
