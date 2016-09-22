@@ -1,3 +1,6 @@
+http://vitan.github.io/docker/2016/01/25/difference-bewteen-docker-swarm-and-mesos.html
+http://vitan.github.io/docker/mesos/2016/03/08/tools-around-mesos.html
+http://vitan.github.io/docker/2016/09/22/docker-112-swarmkit.html
 http://vitan.github.io/docker/2016/01/22/aufs-vs-devicemapper.html
 http://vitan.github.io/distributed/system/2015/12/19/how-to-test-apps-denpendency-in-distributed-system.html
 http://vitan.github.io/spark/2015/12/19/spark-FAQ.html
